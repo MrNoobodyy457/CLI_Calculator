@@ -43,7 +43,7 @@ The project includes two versions of the calculator:
 ## 🚀 Next steps
 
 - [x] Add a history feature
-- [ ] Improve history feature (currently can’t clear history)
+- [x] Improve history feature (currently can’t clear history)
 - [ ] Build a simple interface someday (maybe GUI)
 
 ---

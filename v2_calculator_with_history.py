@@ -63,11 +63,18 @@ def calculator():
 
         cont = input('''Do you want to continue?
 (Press enter to continue) 
-(Enter 'H' to see previous calculations)
+(Enter 'H' for history)
+(Enter 'C' for clear history)
 (Enter 'N' to stop): ''')
         if cont.lower() in ["n", "no", "stop"]:
             print("Thanks for using")
             break
+        elif cont.lower() in ["c", "clear"]:
+            histroy.clear()
+            print("History cleared.")
+            cont = input('''Do you want to continue?
+(Press enter to continue)
+(Enter 'N' to stop): ''')
         elif cont.lower() in ["history", "h", "his"]:
             print("Calculation History:")
             for entry in histroy:

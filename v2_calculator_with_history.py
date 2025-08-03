@@ -21,44 +21,51 @@ def calculator():
             continue
 
         operation = input("Select an operation [+, -, *, /, ^, root(r)]: ")
-        if operation.lower() in ["n", "no", "stop"]:
-            break
 
-        if operation == "+":
-            answer = num1 + num2
-            print("Answer:", answer)
+        try:
+            if operation.lower() in ["n", "no", "stop"]:
+                break
 
-        elif operation == "-":
-            answer = num1 - num2
-            print("Answer:", answer)
-
-        elif operation == "root" or operation == "r":
-            try:
-                answer = num1 ** (1/num2)
+            if operation == "+":
+                answer = num1 + num2
                 print("Answer:", answer)
-            except ZeroDivisionError:
-                print("Cannot calculate root with zero as the second number.")
-                continue
-        elif operation == "*":
-            answer = num1 * num2
-            print("Answer:", answer)
 
-        elif operation == "/":
-            try:
-                answer = num1 / num2
+            elif operation == "-":
+                answer = num1 - num2
                 print("Answer:", answer)
-                print("Quotient:", num1 // num2)
-                print("Remainder:", num1 % num2)
-            except ZeroDivisionError:
-                print("Division by zero is not allowed.")
-                continue
-        elif operation == "^":
-            answer = num1 ** num2
-            print("Answer:", answer)
 
-        else:
-            print("The entered operation does not exist.")
+            elif operation == "root" or operation == "r":
+                try:
+                    answer = num1 ** (1/num2)
+                    print("Answer:", answer)
+                except ZeroDivisionError:
+                    print("Cannot calculate root with zero as the second number.")
+                    continue
+            elif operation == "*":
+                answer = num1 * num2
+                print("Answer:", answer)
+
+            elif operation == "/":
+                try:
+                    answer = num1 / num2
+                    print("Answer:", answer)
+                    print("Quotient:", num1 // num2)
+                    print("Remainder:", num1 % num2)
+                except ZeroDivisionError:
+                    print("Division by zero is not allowed.")
+                    continue
+            elif operation == "^":
+                answer = num1 ** num2
+                print("Answer:", answer)
+
+            else:
+                print("The entered operation does not exist.")
+                continue
+        except OverflowError:
+            print('''The result is too large to be represented.
+Please try with smaller numbers.''')
             continue
+
         histroy.append(f"{num1} {operation} {num2} = {answer}")
 
         cont = input('''Do you want to continue?
@@ -77,8 +84,14 @@ def calculator():
 (Enter 'N' to stop): ''')
         elif cont.lower() in ["history", "h", "his"]:
             print("Calculation History:")
-            for entry in histroy:
-                print(entry)
+            lenth = len(histroy)
+            if lenth == 0:
+                print("No history available.")
+                continue
+            else:
+                for i in range(lenth):
+                    print(f"{(i + 1)}.", histroy[i])
+
             cont = input('''Do you want to continue? 
 (Press enter to continue)
 (Enter 'N' to stop): ''')

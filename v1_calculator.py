@@ -20,41 +20,48 @@ def calculator():
             continue
 
         operation = input("Select an operation [+, -, *, /, ^, root(r)]: ")
-        if operation.lower() in ["n", "no", "stop"]:
-            break
 
-        if operation == "+":
-            print("Answer:", num1 + num2)
+        try:
+            if operation.lower() in ["n", "no", "stop"]:
+                break
 
-        elif operation == "-":
-            print("Answer:", num1 - num2)
+            if operation == "+":
+                print("Answer:", num1 + num2)
 
-        elif operation == "root" or operation == "r":
-            try:
-                print("Answer:", num1 ** (1/num2))
-            except ZeroDivisionError:
-                print("Cannot calculate root with zero as the second number.")
+            elif operation == "-":
+                print("Answer:", num1 - num2)
+
+            elif operation == "root" or operation == "r":
+                try:
+                    print("Answer:", num1 ** (1/num2))
+                except ZeroDivisionError:
+                    print("Cannot calculate root with zero as the second number.")
+                    continue
+            elif operation == "*":
+                print("Answer:", num1 * num2)
+
+            elif operation == "/":
+                try:
+                    print("Answer:", num1 / num2)
+                    print("Quotient:", num1 // num2)
+                    print("Remainder:", num1 % num2)
+                except ZeroDivisionError:
+                    print("Division by zero is not allowed.")
+                    continue
+            elif operation == "^":
+                print("Answer:", num1 ** num2)
+
+            else:
+                print("The entered operation does not exist.")
                 continue
-        elif operation == "*":
-            print("Answer:", num1 * num2)
-
-        elif operation == "/":
-            try:
-                print("Answer:", num1 / num2)
-                print("Quotient:", num1 // num2)
-                print("Remainder:", num1 % num2)
-            except ZeroDivisionError:
-                print("Division by zero is not allowed.")
-                continue
-        elif operation == "^":
-            print("Answer:", num1 ** num2)
-
-        else:
-            print("The entered operation does not exist.")
+        except OverflowError:
+            print('''The result is too large to be represented.
+Please try with smaller numbers.''')
             continue
 
-        cont = input("Do you want to continue? (Enter 'N' to stop): ")
-        if cont.lower() == "n":
+        cont = input('''Do you want to continue? 
+(Press enter to continue or type 'N' to stop): ''')
+        if cont.lower().strip() in ["n", "no", "stop"]:
             print("Thanks for using")
             break
 
